@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages w/ Self-Hosted Backend</title>
+</head>
+<body>
+    <p id="output">Fetching from backend...</p>    
+
+    <script>
+        const outputEl = document.getElementById("output");
+        async function getData() {
+            try {
+                const res = await fetch("https://pausingly-subrostral-orlando.ngrok-free.dev/api/hello", {
+                    headers: {
+                        "ngrok-skip-browser-warning": "true"
+                    }
+                });
+                const data = await res.json();
+                outputEl.innerText = `message: ${data.message}\ntime: ${data.time}`;
+            } catch (err) {
+                outputEl.innerText = `Error: ${err}`
+            }
+        }
+        getData();
+    </script>
+</body>
+</html>
